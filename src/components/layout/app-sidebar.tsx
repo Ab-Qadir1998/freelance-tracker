@@ -13,7 +13,8 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import NavMain from "./nav-main";
-import { ChartBar, CreditCard, LayoutDashboard, List } from "lucide-react";
+import { ChartBar, CreditCard, FolderKanban, LayoutDashboard, List } from "lucide-react";
+
 
 const data = {
   user: {
@@ -31,6 +32,11 @@ const data = {
       title: "Clients",
       url: "/clients",
       icon: List,
+    },
+    {
+      title: "Projects",
+      url: "/projects",
+      icon: FolderKanban,
     },
     {
       title: "Tasks",

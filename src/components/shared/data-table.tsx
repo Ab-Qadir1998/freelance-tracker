@@ -24,12 +24,18 @@ import React from "react";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  filterColumn?: string;
+  filterPlaceholder?: string;
 }
+
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  filterColumn,
+  filterPlaceholder = "Filter...",
 }: DataTableProps<TData, TValue>) {
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -48,18 +54,21 @@ export function DataTable<TData, TValue>({
 
   return (
     <React.Fragment>
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter Clients..."
-          value={
-            (table.getColumn("clientName")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("clientName")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-      </div>
+      {filterColumn && (
+        <div className="flex items-center py-4">
+          <Input
+            placeholder={filterPlaceholder}
+            value={
+              (table.getColumn(filterColumn)?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn(filterColumn)?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+        </div>
+      )}
+
       <div className="overflow-hidden rounded-md border">
         <Table>
           <TableHeader>
@@ -71,9 +80,9 @@ export function DataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   );
                 })}

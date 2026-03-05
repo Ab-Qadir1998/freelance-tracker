@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-import { Field } from "../ui/field";
-import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -14,34 +12,46 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ThemeToggler } from "./theme-toggler";
 import { usePathname } from "next/navigation";
-import { ChartBar, CreditCard, LayoutDashboard, List } from "lucide-react";
+import {
+  ChartBar,
+  CreditCard,
+  FolderKanban,
+  LayoutDashboard,
+  List,
+} from "lucide-react";
+import Link from "next/link";
+
+const routeMap: Record<string, { label: string; icon: React.ReactNode }> = {
+  "/dashboard": { label: "Dashboard", icon: <LayoutDashboard /> },
+  "/clients": { label: "Clients", icon: <List /> },
+  "/projects": { label: "Projects", icon: <FolderKanban /> },
+  "/tasks": { label: "Tasks", icon: <ChartBar /> },
+  "/payments": { label: "Payments", icon: <CreditCard /> },
+  "/settings": { label: "Settings", icon: <LayoutDashboard /> },
+};
+
 
 const Header = () => {
   const pathName = usePathname();
 
-  const renderIcon = () => {
-    return (
-      <>
-        {pathName === "/dashboard" && <LayoutDashboard />}
-        {pathName === "/clients" && <List />}
-        {pathName === "/tasks" && <ChartBar />}
-        {pathName === "/payments" && <CreditCard />}
-      </>
-    );
+  const getRouteInfo = () => {
+    if (routeMap[pathName]) return routeMap[pathName];
+    if (pathName.startsWith("/clients/"))
+      return { label: "Client Detail", icon: <List /> };
+    const base = "/" + pathName.split("/")[1];
+    return routeMap[base] ?? { label: "Dashboard", icon: <LayoutDashboard /> };
   };
+
+  const { label, icon } = getRouteInfo();
 
   return (
     <header className="px-5 py-3 ps-7 border-b flex items-center justify-between">
-      {/* <Field orientation="horizontal" className="w-100">
-        <Input type="search" placeholder="Search..." />
-        <Button className="cursor-pointer">Search</Button>
-      </Field> */}
       <h2 className="text-xl capitalize flex items-center gap-2">
-        {renderIcon()}
-        {pathName?.slice(1) || "Dashboard"}
+        {icon}
+        {label}
       </h2>
 
-      <div className=" flex items-center gap-3">
+      <div className="flex items-center gap-3">
         <ThemeToggler />
 
         <DropdownMenu>
@@ -59,9 +69,15 @@ const Header = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-32">
             <DropdownMenuGroup>
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/settings/profile" className="cursor-pointer w-full">Profile</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/settings/billing" className="cursor-pointer w-full">Billing</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/settings/preferences" className="cursor-pointer w-full">Settings</Link>
+              </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
