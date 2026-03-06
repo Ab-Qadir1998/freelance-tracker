@@ -21,11 +21,11 @@ import Link from "next/link";
 
 const statusVariant: Record<
     ProjectsInterface["status"],
-    "default" | "secondary" | "destructive" | "outline"
+    "default" | "secondary" | "destructive" | "outline" | "success" | "warning" | "neutral"
 > = {
-    active: "default",
-    completed: "secondary",
-    "on-hold": "outline",
+    active: "neutral",
+    completed: "success",
+    "on-hold": "warning",
 };
 
 const statusLabel: Record<ProjectsInterface["status"], string> = {
@@ -162,7 +162,7 @@ const EditProjectModal = ({ project }: { project: ProjectsInterface }) => {
                             defaultValue={project.title}
                         />
                     </Field>
-                    <Field className="flex flex-col gap-1.5">
+                    <Field className="flex flex-col">
                         <FieldLabel htmlFor={`project-client-${project.id}`}>
                             Client
                         </FieldLabel>
@@ -189,7 +189,7 @@ const EditProjectModal = ({ project }: { project: ProjectsInterface }) => {
                             defaultValue={project.budget}
                         />
                     </Field>
-                    <Field className="flex flex-col gap-1.5 overflow-hidden">
+                    <Field className="flex flex-col overflow-hidden">
                         <FieldLabel htmlFor={`project-deadline-${project.id}`}>
                             Deadline
                         </FieldLabel>

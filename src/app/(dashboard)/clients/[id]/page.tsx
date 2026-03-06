@@ -21,7 +21,10 @@ import {
     Calendar,
     FolderKanban,
     DollarSign,
+    ArrowLeft,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface ClientDetailPageProps {
     params: Promise<{ id: string }>;
@@ -57,6 +60,11 @@ const ClientDetail = async ({ params }: ClientDetailPageProps) => {
             {/* Client Header */}
             <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center gap-4">
+                    <Link href="/clients">
+                        <Button variant="ghost" size="icon" className="cursor-pointer">
+                            <ArrowLeft />
+                        </Button>
+                    </Link>
                     <div className="size-14 rounded-full bg-secondary flex items-center justify-center text-xl font-semibold text-secondary-foreground">
                         {client.clientName.charAt(0)}
                     </div>

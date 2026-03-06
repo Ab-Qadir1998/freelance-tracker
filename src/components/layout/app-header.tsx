@@ -22,12 +22,12 @@ import {
 import Link from "next/link";
 
 const routeMap: Record<string, { label: string; icon: React.ReactNode }> = {
-  "/dashboard": { label: "Dashboard", icon: <LayoutDashboard /> },
-  "/clients": { label: "Clients", icon: <List /> },
-  "/projects": { label: "Projects", icon: <FolderKanban /> },
-  "/tasks": { label: "Tasks", icon: <ChartBar /> },
-  "/payments": { label: "Payments", icon: <CreditCard /> },
-  "/settings": { label: "Settings", icon: <LayoutDashboard /> },
+  "/dashboard": { label: "Dashboard", icon: <LayoutDashboard size={22} /> },
+  "/clients": { label: "Clients", icon: <List size={22} /> },
+  "/projects": { label: "Projects", icon: <FolderKanban size={22} /> },
+  "/tasks": { label: "Tasks", icon: <ChartBar size={22} /> },
+  "/payments": { label: "Payments", icon: <CreditCard size={22} /> },
+  "/settings": { label: "Settings", icon: <LayoutDashboard size={22} /> },
 };
 
 
@@ -47,7 +47,9 @@ const Header = () => {
   return (
     <header className="px-5 py-3 ps-7 border-b flex items-center justify-between">
       <h2 className="text-xl capitalize flex items-center gap-2">
-        {icon}
+        <span className="p-2 rounded-full bg-gray-200 dark:bg-stone-800 text-sm">
+          {icon}
+        </span>
         {label}
       </h2>
 
@@ -81,7 +83,9 @@ const Header = () => {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem variant="destructive">Log out</DropdownMenuItem>
+              <DropdownMenuItem variant="destructive" asChild>
+                <Link href="/login" className="cursor-pointer w-full">Log out</Link>
+              </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>

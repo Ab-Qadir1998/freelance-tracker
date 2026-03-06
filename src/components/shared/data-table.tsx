@@ -8,6 +8,7 @@ import {
   ColumnFiltersState,
   getFilteredRowModel,
   SortingState,
+  getPaginationRowModel,
 } from "@tanstack/react-table";
 
 import {
@@ -19,6 +20,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import React from "react";
 
 interface DataTableProps<TData, TValue> {
@@ -46,6 +56,12 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    initialState: {
+      pagination: {
+        pageSize: 8,
+      },
+    },
     state: {
       sorting,
       columnFilters,
@@ -119,6 +135,84 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
+
+      {
+        table.getPageCount() > 1 && (
+          <div className="py-4">
+            <Pagination className="justify-end">
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      table.previousPage();
+                    }}
+                    {...(!table.getCanPreviousPage() && {
+                      className: "pointer-events-none opacity-50",
+                      "aria-disabled": true,
+                    })}
+                  />
+                </PaginationItem>
+
+                {Array.from({ length: table.getPageCount() }, (_, i) => i).map(
+                  (pageIndex) => {
+                    if (
+                      table.getPageCount() > 7 &&
+                      pageIndex > 1 &&
+                      pageIndex < table.getPageCount() - 2 &&
+                      Math.abs(pageIndex - table.getState().pagination.pageIndex) > 1
+                    ) {
+                      if (
+                        pageIndex === 2 ||
+                        pageIndex === table.getPageCount() - 2
+                      ) {
+                        return (
+                          <PaginationItem key={pageIndex}>
+                            <PaginationEllipsis />
+                          </PaginationItem>
+                        );
+                      }
+                      return null;
+                    }
+
+                    return (
+                      <PaginationItem key={pageIndex}>
+                        <PaginationLink
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            table.setPageIndex(pageIndex);
+                          }}
+                          isActive={
+                            table.getState().pagination.pageIndex === pageIndex
+                          }
+                        >
+                          {pageIndex + 1}
+                        </PaginationLink>
+                      </PaginationItem>
+                    );
+                  }
+                )}
+
+                <PaginationItem>
+                  <PaginationNext
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      table.nextPage();
+                    }}
+                    {...(!table.getCanNextPage() && {
+                      className: "pointer-events-none opacity-50",
+                      "aria-disabled": true,
+                    })}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
+        )
+      }
     </React.Fragment>
   );
 }

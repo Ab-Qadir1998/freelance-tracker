@@ -54,7 +54,7 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props} className="relative">
-      <SidebarTrigger className="bg-secondary absolute top-[22px] right-[-15px] z-5 p-2 shadow-sm cursor-pointer" />
+      <SidebarTrigger className="bg-secondary absolute top-[16px] right-[-15px] z-5 p-2 shadow-sm cursor-pointer" />
       <SidebarHeader className="pt-4">
         <SidebarMenu>
           <SidebarMenuItem>

@@ -46,7 +46,7 @@ const Projects = () => {
                                     placeholder="e.g. E-Commerce Redesign"
                                 />
                             </Field>
-                            <Field className="flex flex-col gap-1.5">
+                            <Field className="flex flex-col">
                                 <FieldLabel htmlFor="project-client">Client</FieldLabel>
                                 <Select>
                                     <SelectTrigger id="project-client">
@@ -69,7 +69,7 @@ const Projects = () => {
                                     placeholder="e.g. 3000"
                                 />
                             </Field>
-                            <Field className="flex flex-col gap-1.5 overflow-hidden">
+                            <Field className="flex flex-col overflow-hidden">
                                 <FieldLabel htmlFor="project-deadline">Deadline</FieldLabel>
                                 <DatePicker date={deadline} setDate={setDeadline} />
                             </Field>

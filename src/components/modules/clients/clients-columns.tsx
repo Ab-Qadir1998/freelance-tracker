@@ -66,7 +66,7 @@ export const clientColumns: ColumnDef<ClientsInterface>[] = [
     header: "Status",
     cell: ({ row }) => (
       <Badge
-        variant={row.original.status === "active" ? "default" : "secondary"}
+        variant={row.original.status === "active" ? "neutral" : "secondary"}
         className="capitalize"
       >
         {row.original.status}

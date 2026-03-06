@@ -22,20 +22,20 @@ import Link from "next/link";
 
 const priorityVariant: Record<
     TasksInterface["priority"],
-    "default" | "secondary" | "destructive" | "outline"
+    "default" | "secondary" | "destructive" | "outline" | "success" | "warning" | "neutral"
 > = {
     high: "destructive",
-    medium: "default",
-    low: "secondary",
+    medium: "warning",
+    low: "neutral",
 };
 
 const statusVariant: Record<
     TasksInterface["status"],
-    "default" | "secondary" | "destructive" | "outline"
+    "default" | "secondary" | "destructive" | "outline" | "success" | "warning" | "neutral"
 > = {
     "in-progress": "default",
-    done: "secondary",
-    todo: "outline",
+    done: "success",
+    todo: "neutral",
 };
 
 const statusLabel: Record<TasksInterface["status"], string> = {

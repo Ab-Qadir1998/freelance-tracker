@@ -22,10 +22,10 @@ import Link from "next/link";
 
 const statusVariant: Record<
     PaymentsInterface["status"],
-    "default" | "secondary" | "destructive" | "outline"
+    "default" | "secondary" | "destructive" | "outline" | "success" | "warning" | "neutral"
 > = {
-    paid: "secondary",
-    pending: "outline",
+    paid: "success",
+    pending: "warning",
     overdue: "destructive",
 };
 

@@ -1,11 +1,32 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CreditCard, Download, Plus } from "lucide-react";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import React from "react";
 
 export default function BillingSettingsPage() {
+    const [payoutMethod, setPayoutMethod] = React.useState("bank");
+
     return (
         <div className="space-y-8">
             <div>
@@ -22,9 +43,63 @@ export default function BillingSettingsPage() {
                 <div className="space-y-4">
                     <div className="flex items-center justify-between">
                         <h4 className="text-sm font-semibold">Payout Methods</h4>
-                        <Button variant="outline" size="sm">
-                            <Plus size={14} className="mr-1" /> Add Method
-                        </Button>
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <Button variant="outline" size="sm">
+                                    <Plus size={14} className="mr-1" /> Add Method
+                                </Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-[425px]">
+                                <DialogHeader>
+                                    <DialogTitle>Add Payout Method</DialogTitle>
+                                    <DialogDescription>
+                                        Choose your preferred payout method and enter the details below.
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <div className="grid gap-4 py-4">
+                                    <Field>
+                                        <FieldLabel>Method Type</FieldLabel>
+                                        <Select
+                                            defaultValue="bank"
+                                            onValueChange={(value) => setPayoutMethod(value)}
+                                        >
+                                            <SelectTrigger className="w-full">
+                                                <SelectValue placeholder="Select a method" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="bank">Bank Transfer</SelectItem>
+                                                <SelectItem value="paypal">PayPal</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </Field>
+
+                                    {payoutMethod === "bank" ? (
+                                        <>
+                                            <Field>
+                                                <FieldLabel htmlFor="bankName">Bank Name</FieldLabel>
+                                                <Input id="bankName" placeholder="e.g. Citibank" />
+                                            </Field>
+                                            <Field>
+                                                <FieldLabel htmlFor="accountNumber">Account Number</FieldLabel>
+                                                <Input id="accountNumber" placeholder="**** **** **** 1234" />
+                                            </Field>
+                                            <Field>
+                                                <FieldLabel htmlFor="routingNumber">Routing Number</FieldLabel>
+                                                <Input id="routingNumber" placeholder="123456789" />
+                                            </Field>
+                                        </>
+                                    ) : (
+                                        <Field>
+                                            <FieldLabel htmlFor="paypalEmail">PayPal Email</FieldLabel>
+                                            <Input id="paypalEmail" type="email" placeholder="john.doe@example.com" />
+                                        </Field>
+                                    )}
+                                </div>
+                                <DialogFooter>
+                                    <Button type="submit">Save Payout Method</Button>
+                                </DialogFooter>
+                            </DialogContent>
+                        </Dialog>
                     </div>
                     <div className="grid gap-4 md:grid-cols-2">
                         <Card className="border-border">
@@ -104,3 +179,4 @@ export default function BillingSettingsPage() {
         </div>
     );
 }
+
