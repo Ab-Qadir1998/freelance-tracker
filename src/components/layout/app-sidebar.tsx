@@ -13,7 +13,8 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import NavMain from "./nav-main";
-import { ChartBar, CreditCard, LayoutDashboard, List } from "lucide-react";
+import { ChartBar, CreditCard, FolderKanban, LayoutDashboard, List } from "lucide-react";
+
 
 const data = {
   user: {
@@ -33,6 +34,11 @@ const data = {
       icon: List,
     },
     {
+      title: "Projects",
+      url: "/projects",
+      icon: FolderKanban,
+    },
+    {
       title: "Tasks",
       url: "/tasks",
       icon: ChartBar,
@@ -48,7 +54,7 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props} className="relative">
-      <SidebarTrigger className="bg-secondary absolute top-[22px] right-[-15px] z-5 p-2 shadow-sm cursor-pointer" />
+      <SidebarTrigger className="bg-secondary absolute top-[16px] right-[-15px] z-5 p-2 shadow-sm cursor-pointer" />
       <SidebarHeader className="pt-4">
         <SidebarMenu>
           <SidebarMenuItem>

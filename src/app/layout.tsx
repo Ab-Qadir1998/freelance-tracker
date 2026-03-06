@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
-import { AppSidebar } from "@/components/layout/app-sidebar";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import Header from "@/components/layout/app-header";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 
 const rubik = Rubik({
@@ -32,17 +28,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarProvider>
-            <TooltipProvider>
-              <div className="flex w-full">
-                <AppSidebar />
-                <div className="w-full">
-                  <Header />
-                  {children}
-                </div>
-              </div>
-            </TooltipProvider>
-          </SidebarProvider>
+          {children}
         </ThemeProvider>
       </body>
     </html>

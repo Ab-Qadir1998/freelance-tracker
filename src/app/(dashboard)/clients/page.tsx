@@ -24,16 +24,16 @@ const Clients = () => {
           submitTrigger={<Button type="submit">Add Client</Button>}
         >
           <form>
-            <div className="grid grid-cols-1 md:grid-cols-2  gap-3">
-              <Field data-disabled>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <Field>
                 <FieldLabel htmlFor="client-name">Name</FieldLabel>
                 <Input
                   id="client-name"
                   type="text"
-                  placeholder="e.g John Deo"
+                  placeholder="e.g John Doe"
                 />
               </Field>
-              <Field data-disabled>
+              <Field>
                 <FieldLabel htmlFor="client-email">Email</FieldLabel>
                 <Input
                   id="client-email"
@@ -41,7 +41,7 @@ const Clients = () => {
                   placeholder="e.g john@example.com"
                 />
               </Field>
-              <Field data-disabled>
+              <Field>
                 <FieldLabel htmlFor="client-contact">Contact</FieldLabel>
                 <Input
                   id="client-contact"
@@ -49,13 +49,15 @@ const Clients = () => {
                   placeholder="e.g +123456798"
                 />
               </Field>
-              <Field data-disabled>
-                <FieldLabel htmlFor="active-projects">
-                  Active Projects
-                </FieldLabel>
-                <Input id="active-projects" type="tel" placeholder="e.g 5" />
+              <Field>
+                <FieldLabel htmlFor="client-platform">Platform</FieldLabel>
+                <Input
+                  id="client-platform"
+                  type="text"
+                  placeholder="e.g Upwork, Fiverr"
+                />
               </Field>
-              <Field data-disabled className="col-span-2">
+              <Field className="col-span-2">
                 <FieldLabel htmlFor="pending-amount">Pending Amount</FieldLabel>
                 <Input
                   id="pending-amount"
@@ -63,14 +65,19 @@ const Clients = () => {
                   placeholder="e.g $2000"
                 />
               </Field>
-              <div className="col-span-2 mt-4">
+              <div className="col-span-2 mt-2">
                 <FileUpload />
               </div>
             </div>
           </form>
         </AppModal>
       </div>
-      <DataTable columns={clientColumns} data={clientsData} />
+      <DataTable
+        columns={clientColumns}
+        data={clientsData}
+        filterColumn="clientName"
+        filterPlaceholder="Filter clients..."
+      />
     </Content>
   );
 };
