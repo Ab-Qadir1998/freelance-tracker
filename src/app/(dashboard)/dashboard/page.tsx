@@ -111,7 +111,7 @@ const Dashboard = () => {
       {/* Middle Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
         {/* Upcoming Tasks */}
-        <Card>
+        <Card className="max-h-[360px] overflow-y-auto">
           <CardContent className="py-5">
             <h4 className="font-medium mb-4 flex items-center gap-2">
               <CheckSquare size={16} />
@@ -166,7 +166,7 @@ const Dashboard = () => {
         </Card>
 
         {/* Payment Alerts */}
-        <Card>
+        <Card className="max-h-[360px] overflow-y-auto">
           <CardContent className="py-5">
             <h4 className="font-medium mb-4 flex items-center gap-2">
               <AlertCircle size={16} />
