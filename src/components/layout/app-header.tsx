@@ -20,6 +20,7 @@ import {
   LayoutDashboard,
   List,
   Search,
+  BarChart3,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -70,6 +71,7 @@ const notifications = [
 
 const routeMap: Record<string, { label: string; icon: React.ReactNode }> = {
   "/dashboard": { label: "Dashboard", icon: <LayoutDashboard size={22} /> },
+  "/analytics": { label: "Analytics", icon: <BarChart3 size={22} /> },
   "/clients": { label: "Clients", icon: <List size={22} /> },
   "/projects": { label: "Projects", icon: <FolderKanban size={22} /> },
   "/tasks": { label: "Tasks", icon: <ChartBar size={22} /> },
@@ -100,7 +102,7 @@ const Header = () => {
         {label}
       </h2>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         <Button
           variant="outline"
           className="relative h-9 w-9 p-0 xl:h-10 xl:w-60 xl:justify-start xl:px-3 xl:py-2"
@@ -121,7 +123,7 @@ const Header = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="rounded-full cursor-pointer relative"
+              className="rounded-full cursor-pointer relative border dark:border-input dark:bg-input/30 dark:hover:bg-input/50"
             >
               <Bell size={20} />
               <span className="absolute top-2 right-2 flex h-2 w-2">

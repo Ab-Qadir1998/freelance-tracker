@@ -20,7 +20,13 @@ import {
 
 export const description = "A stacked area chart for revenue";
 
-const chartData = [
+export type FinancialActivityPoint = {
+    month: string;
+    revenue: number;
+    expenses: number;
+};
+
+const defaultChartData: FinancialActivityPoint[] = [
     { month: "January", revenue: 1200, expenses: 400 },
     { month: "February", revenue: 2100, expenses: 800 },
     { month: "March", revenue: 1800, expenses: 600 },
@@ -32,28 +38,44 @@ const chartData = [
 const chartConfig = {
     revenue: {
         label: "Revenue",
-        color: "hsl(var(--chart-1))",
+        theme: {
+            light: "#2563eb",
+            dark: "#60a5fa",
+        },
     },
     expenses: {
         label: "Expenses",
-        color: "hsl(var(--chart-2))",
+        theme: {
+            light: "#f97316",
+            dark: "#fdba74",
+        },
     },
 } satisfies ChartConfig;
 
-export function DashboardActivityChart() {
+export function FinancialActivityChart({
+    title = "Financial Activity",
+    descriptionText = "Showing revenue and business expenses for the last 6 months",
+    data = defaultChartData,
+    className,
+    showFooter = true,
+}: {
+    title?: string;
+    descriptionText?: string;
+    data?: FinancialActivityPoint[];
+    className?: string;
+    showFooter?: boolean;
+}) {
     return (
-        <Card className="col-span-1 lg:col-span-2">
+        <Card className={className ?? "col-span-1 lg:col-span-2"}>
             <CardHeader>
-                <CardTitle>Financial Activity</CardTitle>
-                <CardDescription>
-                    Showing revenue and business expenses for the last 6 months
-                </CardDescription>
+                <CardTitle>{title}</CardTitle>
+                <CardDescription>{descriptionText}</CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig} className="max-h-[300px] w-full">
                     <AreaChart
                         accessibilityLayer
-                        data={chartData}
+                        data={data}
                         margin={{
                             left: -20,
                             right: 12,
@@ -119,18 +141,21 @@ export function DashboardActivityChart() {
                     </AreaChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter>
-                <div className="flex w-full items-start gap-2 text-sm">
-                    <div className="grid gap-2">
-                        <div className="flex items-center gap-2 font-medium leading-none">
-                            Revenue up by 15.2% this month <TrendingUp className="h-4 w-4 text-emerald-500" />
-                        </div>
-                        <div className="flex items-center gap-2 leading-none text-muted-foreground">
-                            January - June 2026
+            {showFooter ? (
+                <CardFooter>
+                    <div className="flex w-full items-start gap-2 text-sm">
+                        <div className="grid gap-2">
+                            <div className="flex items-center gap-2 font-medium leading-none">
+                                Revenue up by 15.2% this month{" "}
+                                <TrendingUp className="h-4 w-4 text-emerald-500" />
+                            </div>
+                            <div className="flex items-center gap-2 leading-none text-muted-foreground">
+                                January - June 2026
+                            </div>
                         </div>
                     </div>
-                </div>
-            </CardFooter>
+                </CardFooter>
+            ) : null}
         </Card>
     );
 }

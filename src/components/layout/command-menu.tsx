@@ -15,6 +15,7 @@ import {
     CheckSquare,
     PlusCircle,
     Search,
+    BarChart3,
 } from "lucide-react"
 
 import {
@@ -65,17 +66,23 @@ export function CommandMenu() {
                     <CommandItem
                         value="Dashboard"
                         onSelect={() => runCommand(() => router.push("/dashboard"))}
-                        onClick={() => runCommand(() => router.push("/dashboard"))}
-                        className="cursor-pointer"
+                        className="cursor-pointer rounded-sm transition-colors"
                     >
                         <LayoutDashboard className="mr-2 h-4 w-4" />
                         <span>Dashboard</span>
                     </CommandItem>
                     <CommandItem
+                        value="Analytics"
+                        onSelect={() => runCommand(() => router.push("/analytics"))}
+                        className="cursor-pointer rounded-sm transition-colors"
+                    >
+                        <BarChart3 className="mr-2 h-4 w-4" />
+                        <span>Analytics</span>
+                    </CommandItem>
+                    <CommandItem
                         value="Clients"
                         onSelect={() => runCommand(() => router.push("/clients"))}
-                        onClick={() => runCommand(() => router.push("/clients"))}
-                        className="cursor-pointer"
+                        className="cursor-pointer rounded-sm transition-colors"
                     >
                         <Users className="mr-2 h-4 w-4" />
                         <span>Clients</span>
@@ -83,8 +90,7 @@ export function CommandMenu() {
                     <CommandItem
                         value="Projects"
                         onSelect={() => runCommand(() => router.push("/projects"))}
-                        onClick={() => runCommand(() => router.push("/projects"))}
-                        className="cursor-pointer"
+                        className="cursor-pointer rounded-sm transition-colors"
                     >
                         <FolderKanban className="mr-2 h-4 w-4" />
                         <span>Projects</span>
@@ -92,8 +98,7 @@ export function CommandMenu() {
                     <CommandItem
                         value="Tasks"
                         onSelect={() => runCommand(() => router.push("/tasks"))}
-                        onClick={() => runCommand(() => router.push("/tasks"))}
-                        className="cursor-pointer"
+                        className="cursor-pointer rounded-sm transition-colors"
                     >
                         <CheckSquare className="mr-2 h-4 w-4" />
                         <span>Tasks</span>
@@ -101,8 +106,7 @@ export function CommandMenu() {
                     <CommandItem
                         value="Payments"
                         onSelect={() => runCommand(() => router.push("/payments"))}
-                        onClick={() => runCommand(() => router.push("/payments"))}
-                        className="cursor-pointer"
+                        className="cursor-pointer rounded-sm transition-colors"
                     >
                         <CreditCard className="mr-2 h-4 w-4" />
                         <span>Payments</span>
@@ -113,8 +117,7 @@ export function CommandMenu() {
                     <CommandItem
                         value="Profile"
                         onSelect={() => runCommand(() => router.push("/settings/profile"))}
-                        onClick={() => runCommand(() => router.push("/settings/profile"))}
-                        className="cursor-pointer"
+                        className="cursor-pointer rounded-sm transition-colors"
                     >
                         <User className="mr-2 h-4 w-4" />
                         <span>Profile</span>
@@ -122,8 +125,7 @@ export function CommandMenu() {
                     <CommandItem
                         value="Billing"
                         onSelect={() => runCommand(() => router.push("/settings/billing"))}
-                        onClick={() => runCommand(() => router.push("/settings/billing"))}
-                        className="cursor-pointer"
+                        className="cursor-pointer rounded-sm transition-colors"
                     >
                         <CreditCard className="mr-2 h-4 w-4" />
                         <span>Billing</span>
@@ -131,8 +133,7 @@ export function CommandMenu() {
                     <CommandItem
                         value="Settings"
                         onSelect={() => runCommand(() => router.push("/settings/preferences"))}
-                        onClick={() => runCommand(() => router.push("/settings/preferences"))}
-                        className="cursor-pointer"
+                        className="cursor-pointer rounded-sm transition-colors"
                     >
                         <Settings className="mr-2 h-4 w-4" />
                         <span>Settings</span>

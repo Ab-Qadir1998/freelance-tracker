@@ -5,7 +5,6 @@ import { clientsData } from "@/core/mock/clients.mock";
 import { projectsData } from "@/core/mock/projects.mock";
 import { tasksData } from "@/core/mock/tasks.mock";
 import { paymentsData } from "@/core/mock/payments.mock";
-import { DashboardActivityChart } from "@/components/modules/dashboard/dashboard-activity-chart";
 import {
   Users,
   FolderKanban,
@@ -264,8 +263,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       </div>
-      {/* Financial Activity Chart */}
-      <DashboardActivityChart />
+    
 
     </Content>
   );
