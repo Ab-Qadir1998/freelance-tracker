@@ -5,7 +5,6 @@ import { clientsData } from "@/core/mock/clients.mock";
 import { projectsData } from "@/core/mock/projects.mock";
 import { tasksData } from "@/core/mock/tasks.mock";
 import { paymentsData } from "@/core/mock/payments.mock";
-import { DashboardActivityChart } from "@/components/modules/dashboard/dashboard-activity-chart";
 import {
   Users,
   FolderKanban,
@@ -111,7 +110,7 @@ const Dashboard = () => {
       {/* Middle Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
         {/* Upcoming Tasks */}
-        <Card>
+        <Card className="max-h-[360px] overflow-y-auto">
           <CardContent className="py-5">
             <h4 className="font-medium mb-4 flex items-center gap-2">
               <CheckSquare size={16} />
@@ -166,7 +165,7 @@ const Dashboard = () => {
         </Card>
 
         {/* Payment Alerts */}
-        <Card>
+        <Card className="max-h-[360px] overflow-y-auto">
           <CardContent className="py-5">
             <h4 className="font-medium mb-4 flex items-center gap-2">
               <AlertCircle size={16} />
@@ -264,8 +263,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       </div>
-      {/* Financial Activity Chart */}
-      <DashboardActivityChart />
+    
 
     </Content>
   );

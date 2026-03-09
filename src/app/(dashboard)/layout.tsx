@@ -2,6 +2,7 @@ import { AppSidebar } from "@/components/layout/app-sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import Header from "@/components/layout/app-header";
+import { CommandMenu } from "@/components/layout/command-menu";
 
 export default function DashboardLayout({
     children,
@@ -20,6 +21,7 @@ export default function DashboardLayout({
                         </main>
                     </div>
                 </div>
+                <CommandMenu />
             </TooltipProvider>
         </SidebarProvider>
     );

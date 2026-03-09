@@ -13,7 +13,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import NavMain from "./nav-main";
-import { ChartBar, CreditCard, FolderKanban, LayoutDashboard, List } from "lucide-react";
+import { BarChart3, ChartBar, CreditCard, FolderKanban, LayoutDashboard, List } from "lucide-react";
 
 
 const data = {
@@ -27,6 +27,11 @@ const data = {
       title: "Dashboard",
       url: "/dashboard",
       icon: LayoutDashboard,
+    },
+    {
+      title: "Analytics",
+      url: "/analytics",
+      icon: BarChart3,
     },
     {
       title: "Clients",
