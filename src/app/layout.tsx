@@ -9,9 +9,9 @@ const rubik = Rubik({
 });
 
 export const metadata: Metadata = {
-  title: "Freelancer Tracker",
+  title: "Task Flows",
   description:
-    "A simple app to track your freelance projects, clients, and invoices.",
+    "A simple app to track your projects, clients, and invoices.",
 };
 
 export default function RootLayout({
