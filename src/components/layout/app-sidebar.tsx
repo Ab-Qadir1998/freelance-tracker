@@ -49,6 +49,11 @@ const data = {
       icon: ChartBar,
     },
     {
+      title: "Kanban",
+      url: "/kanban",
+      icon: LayoutDashboard,
+    },
+    {
       title: "Payments",
       url: "/payments",
       icon: CreditCard,

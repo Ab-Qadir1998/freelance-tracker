@@ -104,6 +104,15 @@ export function CommandMenu() {
                         <span>Tasks</span>
                     </CommandItem>
                     <CommandItem
+                        value="Kanban"
+                        onSelect={() => runCommand(() => router.push("/kanban"))}
+                        onClick={() => runCommand(() => router.push("/kanban"))}
+                        className="cursor-pointer"
+                    >
+                        <CheckSquare className="mr-2 h-4 w-4" />
+                        <span>Kanban Board</span>
+                    </CommandItem>
+                    <CommandItem
                         value="Payments"
                         onSelect={() => runCommand(() => router.push("/payments"))}
                         className="cursor-pointer rounded-sm transition-colors"

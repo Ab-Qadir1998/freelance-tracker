@@ -75,6 +75,7 @@ const routeMap: Record<string, { label: string; icon: React.ReactNode }> = {
   "/clients": { label: "Clients", icon: <List size={22} /> },
   "/projects": { label: "Projects", icon: <FolderKanban size={22} /> },
   "/tasks": { label: "Tasks", icon: <ChartBar size={22} /> },
+  "/kanban": { label: "Kanban Board", icon: <LayoutDashboard size={22} /> },
   "/payments": { label: "Payments", icon: <CreditCard size={22} /> },
   "/settings": { label: "Settings", icon: <LayoutDashboard size={22} /> },
 };
