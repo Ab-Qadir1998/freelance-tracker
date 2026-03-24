@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { RotateCcw, Filter } from "lucide-react";
+import { clientsData } from "@/core/mock/clients.mock";
+import { projectsData } from "@/core/mock/projects.mock";
 
 export function KanbanFilters() {
     return (
@@ -23,9 +25,11 @@ export function KanbanFilters() {
                     <SelectValue placeholder="All Clients" />
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value="all">All Clients</SelectItem>
-                    <SelectItem value="acme">Acme Corp</SelectItem>
-                    <SelectItem value="global">Global Tech</SelectItem>
+                    {clientsData.map((client) => (
+                        <SelectItem key={client.id} value={client.id}>
+                            {client.clientName}
+                        </SelectItem>
+                    ))}
                 </SelectContent>
             </Select>
 
@@ -34,9 +38,11 @@ export function KanbanFilters() {
                     <SelectValue placeholder="All Projects" />
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value="all">All Projects</SelectItem>
-                    <SelectItem value="ecommerce">E-Commerce Suite</SelectItem>
-                    <SelectItem value="saas">SaaS Dashboard</SelectItem>
+                    {projectsData.map((project) => (
+                        <SelectItem key={project.id} value={project.id}>
+                            {project.title}
+                        </SelectItem>
+                    ))}
                 </SelectContent>
             </Select>
 

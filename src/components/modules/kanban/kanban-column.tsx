@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useMemo } from "react";
 import { useDroppable } from "@dnd-kit/core";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { KanbanColumn as KanbanColumnType, KanbanTask } from "./kanban-types";
@@ -13,9 +14,17 @@ interface KanbanColumnProps {
 }
 
 export function KanbanColumn({ column, tasks }: KanbanColumnProps) {
+    const columnData = useMemo(() => ({
+        type: "Column",
+        column,
+    }), [column]);
+
     const { setNodeRef } = useDroppable({
         id: column.id,
+        data: columnData,
     });
+
+    const taskIds = useMemo(() => tasks.map((t) => t.id), [tasks]);
 
     return (
         <div className="flex flex-col w-[300px] min-w-[300px] shrink-0 bg-slate-50/50 dark:bg-stone-900/50 rounded-lg border p-3 h-full max-h-full">
@@ -26,14 +35,14 @@ export function KanbanColumn({ column, tasks }: KanbanColumnProps) {
                         {tasks.length}
                     </span>
                 </div>
-                <div className="flex items-center gap-1">
+                {/* <div className="flex items-center gap-1">
                     <Button variant="ghost" size="icon" className="h-7 w-7 cursor-pointer hover:bg-white dark:hover:bg-stone-800">
                         <Plus className="h-4 w-4" />
                     </Button>
                     <Button variant="ghost" size="icon" className="h-7 w-7 cursor-pointer hover:bg-white dark:hover:bg-stone-800">
                         <MoreHorizontal className="h-4 w-4" />
                     </Button>
-                </div>
+                </div> */}
             </div>
 
             <div
@@ -41,7 +50,7 @@ export function KanbanColumn({ column, tasks }: KanbanColumnProps) {
                 className="flex-1 flex flex-col gap-3 overflow-y-auto pr-1 custom-scrollbar"
             >
                 <SortableContext
-                    items={tasks.map((t) => t.id)}
+                    items={taskIds}
                     strategy={verticalListSortingStrategy}
                 >
                     {tasks.map((task) => (

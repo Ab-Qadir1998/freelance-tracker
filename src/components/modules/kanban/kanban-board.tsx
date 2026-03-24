@@ -40,6 +40,14 @@ export function KanbanBoard() {
         })
     );
 
+    const tasksByColumn = React.useMemo(() => {
+        return KANBAN_COLUMNS.reduce((acc, col) => {
+            acc[col.id] = tasks.filter((t) => t.status === col.id);
+            return acc;
+        }, {} as Record<string, KanbanTask[]>);
+    }, [tasks]);
+
+
     const onDragStart = (event: DragStartEvent) => {
         if (event.active.data.current?.type === "Task") {
             setActiveTask(event.active.data.current.task);
@@ -66,9 +74,10 @@ export function KanbanBoard() {
                 const activeIndex = tasks.findIndex((t) => t.id === activeId);
                 const overIndex = tasks.findIndex((t) => t.id === overId);
 
-                if (tasks[activeIndex].status !== tasks[overIndex].status) {
-                    tasks[activeIndex].status = tasks[overIndex].status;
-                    return arrayMove(tasks, activeIndex, overIndex - 1);
+                if (activeIndex !== -1 && overIndex !== -1 && tasks[activeIndex].status !== tasks[overIndex].status) {
+                    const updatedTasks = [...tasks];
+                    updatedTasks[activeIndex] = { ...updatedTasks[activeIndex], status: updatedTasks[overIndex].status };
+                    return arrayMove(updatedTasks, activeIndex, overIndex - 1);
                 }
 
                 return arrayMove(tasks, activeIndex, overIndex);
@@ -82,8 +91,12 @@ export function KanbanBoard() {
             setTasks((tasks) => {
                 const activeIndex = tasks.findIndex((t) => t.id === activeId);
 
-                tasks[activeIndex].status = overId as KanbanStatus;
-                return arrayMove(tasks, activeIndex, activeIndex);
+                if (activeIndex !== -1 && tasks[activeIndex].status !== overId) {
+                    const updatedTasks = [...tasks];
+                    updatedTasks[activeIndex] = { ...updatedTasks[activeIndex], status: overId as KanbanStatus };
+                    return arrayMove(updatedTasks, activeIndex, activeIndex);
+                }
+                return tasks;
             });
         }
     };
@@ -105,12 +118,12 @@ export function KanbanBoard() {
                     onDragOver={onDragOver}
                     onDragEnd={onDragEnd}
                 >
-                    <div className="flex gap-6 h-full min-h-[500px]">
+                    <div className="flex gap-6 h-full min-h-[450px]">
                         {KANBAN_COLUMNS.map((col) => (
                             <KanbanColumn
                                 key={col.id}
                                 column={col}
-                                tasks={tasks.filter((t) => t.status === col.id)}
+                                tasks={tasksByColumn[col.id] || []}
                             />
                         ))}
                     </div>
